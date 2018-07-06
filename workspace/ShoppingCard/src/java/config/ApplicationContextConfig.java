@@ -27,9 +27,9 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@ComponentScan("java")
+@ComponentScan("java.*")
 @EnableTransactionManagement
-@PropertySource("classpath:property.properties")
+@PropertySource("classpath:/property.properties")
 public class ApplicationContextConfig {
 
 	@Autowired
@@ -43,7 +43,7 @@ public class ApplicationContextConfig {
 		return rb;
 	}
 	
-	@Bean
+	@Bean(name="viewResolver")
 	public InternalResourceViewResolver getViewResolver(){
 		InternalResourceViewResolver viewResolver=new InternalResourceViewResolver();
 		viewResolver.setPrefix("/WEB-INF/views/");
@@ -66,9 +66,9 @@ public class ApplicationContextConfig {
 		DriverManagerDataSource dataSource=new DriverManagerDataSource();
 		
 		dataSource.setDriverClassName(env.getProperty("ds.database-driver"));
-		dataSource.setUrl(env.getProperty("ds.database-url"));
-		dataSource.setUsername(env.getProperty("ds.database-username"));
-		dataSource.setPassword(env.getProperty("ds.database-password"));
+		dataSource.setUrl(env.getProperty("ds.Url"));
+		dataSource.setUsername(env.getProperty("ds.username"));
+		dataSource.setPassword(env.getProperty("ds.password"));
 		 
 		return dataSource;
 	}
@@ -85,7 +85,7 @@ public class ApplicationContextConfig {
 		
 		LocalSessionFactoryBean factoryBean=new LocalSessionFactoryBean();
 		 // Package contain entity classes
-        factoryBean.setPackagesToScan(new String[] { "org.o7planning.springmvcshoppingcart.entity" });
+        factoryBean.setPackagesToScan(new String[] { "java.entity" });
         factoryBean.setDataSource(dataSource);
         factoryBean.setHibernateProperties(prop);
         factoryBean.afterPropertiesSet();

@@ -111,5 +111,10 @@
   		<version>2.2</version>
   		<type>pom</type>
   	</dependency>
+  	<dependency>
+  		<groupId>javax.servlet.jsp.jstl</groupId>
+  		<artifactId>javax.servlet.jsp.jstl-api</artifactId>
+  		<version>1.2.1</version>
+  	</dependency>
   </dependencies>
 </project>
